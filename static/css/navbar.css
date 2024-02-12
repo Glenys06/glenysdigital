@@ -1,0 +1,22 @@
+.navbar, .navbar .dropdown-item {
+  font-size: 20px;
+}
+.navbar-dark {
+  background-color: #2A0A61 !important;
+}
+.nav-item {
+  display: inline-block;
+  float: left;
+}
+.login {
+  width: 46px !important;
+  height: 46px !important;
+  padding: 0px !important;
+  margin: 0px !important;
+  overflow: hidden;
+  background: #F2EEFC;
+  border-radius: 50%;
+  display: inline-block;  /* Added missing semicolon here */
+  float: right;
+
+}

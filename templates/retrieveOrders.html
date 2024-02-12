@@ -1,0 +1,120 @@
+
+{% extends "base.html" %}
+{% block title %}Euphoric Delights - Orders{% endblock %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="/static/css/orders.css">
+{% endblock %}
+
+{% block content %}
+<h1 class="display-4">Orders</h1>
+<div>
+  {% if count == 0 %}
+  <p>There are no orders.</p>
+  {% elif count == 1 %}
+  <p>There is 1 order for today.</p>
+  {% else %}
+  <p>There are {{ count }} orders for today.</p>
+  {% endif %}
+</div>
+<div> 
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Flavour</th>
+        <th>Scoops</th>
+        <th>Served In</th>
+        <th>Remarks</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for order in orders_list %}
+    <tr>
+      <td>{{ order.get_order_id() }}</td>
+      {% if order.get_flavour() == "01" %}
+      <td><img class="icecream" src="../static/images/flavours/Velvety_Vanilla.png"></img><br>Velvety Vanilla</td>
+      {% elif order.get_flavour() == "02" %}
+      <td><img class="icecream" src="../static/images/flavours/Cotton_Candy_Carnival.png"></img><br>Cotton Candy Carnival</td>
+      {% elif order.get_flavour() == "03" %}
+      <td><img class="icecream" src="../static/images/flavours/Pomegranate_Punch.png"></img><br>Pomegranate Punch</td>
+      {% elif order.get_flavour() == "04" %}
+      <td><img class="icecream" src="../static/images/flavours/Blueberry_Blast.png"></img><br>Blueberry Blast</td>
+      {% elif order.get_flavour() == "05" %}
+      <td><img class="icecream" src="../static/images/flavours/Chocolate_Convergence.png"></img><br>Chocolate Convergence</td>
+      {% endif %}
+      <td>{{ order.get_scoops() }}</td>
+      {% if order.get_serving_vessel() == "B" %}
+      <td>Cup/Bowl</td>
+      {% elif order.get_serving_vessel() == "C" %}
+      <td>Cone</td>
+      {% endif %}
+      <td>{{ order.get_remarks() }}</td>
+    <td>
+      <form action="{{url_for('delete_order', id=order.get_order_id())}}" method="POST">
+        {# <input type="submit" value="Completed" class="btn btn-info" onclick="return confirm('Are you sure you want to mark Order No.{{order.get_order_id()}} as complete?');"> #}
+        <!-- Button to Open the Modal -->
+          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal_Complete_{{order.get_order_id()}}">
+            Complete
+          </button>
+          <!-- The Modal -->
+          <div class="modal" id="myModal_Complete_{{order.get_order_id()}}">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Order Completion</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                  Are you sure you want to mark Order No.{{order.get_order_id()}} as Complete?
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <input type="submit" value="Complete this Order" class="btn btn-info">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      </form>
+    </td>
+      <td><a href="/updateOrder/{{order.get_order_id()}}" class="btn btn-warning" role="button" aria-disabled="true">Modify</a></td>
+      <td>
+        <form action="{{url_for('delete_order', id=order.get_order_id())}}" method="POST">
+          {# <input type="submit" value="Cancel" class="btn btn-danger" onclick="return confirm('Are you sure you want to cancel Order No.{{order.get_order_id()}}?');"> #}
+          <!-- Button to Open the Modal -->
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{order.get_order_id()}}">
+              Cancel
+            </button>
+            <!-- The Modal -->
+            <div class="modal" id="myModal_{{order.get_order_id()}}">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title">Order Cancellation Confirmation</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                    Are you sure you want to cancel Order No.{{order.get_order_id()}}?
+                  </div>
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <input type="submit" value="Cancel this Order" class="btn btn-danger">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

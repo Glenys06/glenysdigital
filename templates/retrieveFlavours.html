@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}Euphoric Delights - Flavour Creator Manager{% endblock %}
+
+{% block content %}
+<h1 class="display-4">Flavour Creator Manager</h1>
+<div>
+  {% if count_id == 0 %}
+  <p>There are no custom flavours yet.</p>
+  {% elif count == 1 %}
+  <p>There is 1 flavour created so far.</p>
+  {% else %}
+  <p>There are {{ count }} flavours created so far.</p>
+  {% endif %}
+</div>
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Creation ID</th>
+        <th>Base Flavour</th>
+        <th>Mix In</th>
+        <th>Topping</th>
+        <th>Remarks</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for product in products_list %}
+    <tr>
+      <td>{{ product.get_creationID() }}</td>
+      {% if product.get_creationBase1() == "01" %}
+      <td>Vanilla</td>
+      {% elif product.get_creationBase1() == "02" %}
+      <td>Chocolate</td>
+      {% elif product.get_creationBase1() == "03" %}
+      <td>Strawberry</td>
+      {% elif product.get_creationBase1() == "04" %}
+      <td>Mint</td>
+      {% elif product.get_creationBase1() == "05" %}
+      <td>Blue Moon</td>
+      {% endif %}
+      {% if product.get_creationMixIn1() == "01" %}
+      <td>Almonds</td>
+      {% elif product.get_creationMixIn1() == "02" %}
+      <td>Walnuts</td>
+      {% elif product.get_creationMixIn1() == "03" %}
+      <td>Pistachios</td>
+      {% endif %}
+      {% if product.get_creationTopping1() == "01" %}
+      <td>Maple Syrup</td>
+      {% elif product.get_creationTopping1() == "02" %}
+      <td>Strawberry Syrup</td>
+      {% elif product.get_creationTopping1() == "03" %}
+      <td>Butterscotch Syrup</td>
+      {% elif product.get_creationTopping1() == "04" %}
+      <td>Blueberry Syrup</td>
+      {% elif product.get_creationTopping1() == "05" %}
+      <td>Chocolate Syrup</td>
+      {% endif %}
+      <td>{{ product.get_remarks() }}</td>
+      <td><a href="/updateProduct/{{product.get_creationID()}}" class="btn btn-warning">Update</a></td>
+      <td>
+        <form action="{{url_for('delete_user', id=product.get_creationID())}}" method="POST">
+          {# <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete Custom Flavour No.{{product.get_creationID()}}?');"> #}
+          <!-- Button to Open the Modal -->
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{product.get_get_creationID()}}">
+              Delete
+            </button>
+            <!-- The Modal -->
+            <div class="modal" id="myModal_{{product.get_creationID()}}">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title">Delete Confirmation</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                    Are you sure you want to delete Custom Flavour No.{{product.get_creationID()}}?
+                  </div>
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <input type="submit" value="Delete" class="btn btn-danger">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

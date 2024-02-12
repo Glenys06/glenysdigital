@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Products</title>
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+   <script>
+       function validateForm() {
+           var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+           var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+           if (!checkedOne) {
+               alert('Please select at least one product.');
+               return false; // Say No to Domination
+           }
+           return true; // Say Yes to Submission
+       }
+   </script>
+</head>
+<body>
+
+{% extends 'base.html' %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+   <!-- Dining Menu -->
+   <form action="/add_to_cart" method="POST" onsubmit="return validateForm();">
+        <p class="center-text">Please tick a box to select a flavor</p>
+       <div class="product-grid">
+           {% for product in products %}
+               <div class="product-item">
+                   <img src="{{ product.image }}" alt="{{ product.name }}">
+                   <h2>{{ product.name }}</h2>
+                   <p>{{ product.description }}</p>
+                   <p class="price">{{ product.price }}</p>
+                   <input type="checkbox" name="product" value="{{ product.id }}">
+                   <input type="number" name="quantity_{{ product.id }}" min="0" max="20" value="0">
+               </div>
+           {% endfor %}
+       </div>
+
+       <div style="text-align:center;">
+           <button type="submit">Add to Cart</button>
+       </div>
+
+   </form>
+{% endblock %}
+
+</body>
+</html>

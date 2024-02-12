@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/payment.css') }}">
+    <title>Payment</title>
+</head>
+<script>
+    function showPaymentSuccess() {
+        alert("Payment successful!");
+        return false; // Prevents form submission
+    }
+</script>
+  <script>
+      function showPaymentSuccess() {
+          // Check if the card number, expiry date, and CVV contain only numbers
+          var cardNumber = document.getElementById("card_number").value;
+          var expiryDate = document.getElementById("expiry_date").value;
+          var cvv = document.getElementById("cvv").value;
+
+          if (!/^\d+$/.test(cardNumber)) {
+              alert("Please enter numbers only for the card number.");
+              return false;
+          }
+
+          if (!/^\d+$/.test(expiryDate)) {
+              alert("Please enter numbers only for the expiration date.");
+              return false;
+          }
+
+          if (!/^\d+$/.test(cvv)) {
+              alert("Please enter numbers only for the CVV.");
+              return false;
+          }
+
+          // If all fields pass validation, show payment successful message
+          alert("Payment successful!");
+          return false; // Prevents form submission
+      }
+  </script>
+<body>
+    <div class="container">
+        <div class="payment-container">
+            <h1>Payment Details</h1>
+            <form onsubmit="showPaymentSuccess(); return false;">
+                <label for="card_number">Card Number:</label>
+                <input type="text" id="card_number" name="card_number" required>
+
+                <label for="expiry_date">Expiration Date:</label>
+                <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YYYY" required>
+
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv" required>
+
+                <label for="billing_address">Billing Address:</label>
+                <textarea id="billing_address" name="billing_address" required></textarea>
+
+                <input type="submit" value="Pay Now">
+            </form>
+        </div> 
+    </div> 
+</body>
+</html>

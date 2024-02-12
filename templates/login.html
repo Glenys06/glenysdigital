@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <!-- Your existing login page content -->
+
+    <div class="container">
+        <h1>Login</h1>
+        <div class="login-form">
+          <form action="{{ url_for('login') }}" method="POST">
+                <input type="text" name="username" placeholder="Username"><br>
+                <input type="password" name="password" placeholder="Password"><br>
+                <button type="submit">Login</button>
+            </form>
+            <div class="links">
+                <a href="{{ url_for('create_account') }}">Create Account</a>
+                <a href="{{ url_for('forgot_password') }}">Forgot Password</a>
+            </div>
+        </div>
+    </div>
+  {% if message %}
+  <p>{{ message }}</p>
+  {% endif %}
+  {% if login_successful %}
+  <script>
+      setTimeout(function(){
+          window.location.href = "{{ url_for('home') }}";
+      }, 5000);
+  </script>
+  {% endif %}
+{% endblock %}
+</body>
+</html>

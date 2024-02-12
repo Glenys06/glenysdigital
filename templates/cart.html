@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+{% extends 'base.html' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+    <!-- Your cart page content -->
+    <div class="cart-grid">
+        {% for item in cart_items %}
+            <div class="cart-item">
+                <h2>{{ item.name }}</h2>
+                <p>Quantity: {{ item.quantity }}</p>
+                <p>Price: {{ item.price }}</p>
+                <p>Total Price: {{ item.total_price }}</p>
+            </div>
+        {% endfor %}
+    </div>
+        <div class="cart-total">
+            <h2 class = "total-price">Total Price: {{ total_price }}</h2>
+        </div>
+<!-- Button to proceed to payment -->
+<div class="button-container">
+    <form action="/payment" method="GET">
+        <button class="proceed-to-payment">Proceed to Payment</button>
+    </form>
+</div>
+{% endblock %}
+</body>
+</html>
+

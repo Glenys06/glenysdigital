@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Euphoric Delights - Contact Us{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/contact.css">
+{% endblock %}
+{% block content %}
+{% from "_formHelper.html" import render_field %}
+
+
+<script>
+  setTimeout(function(){
+    document.querySelectorAll('.alert').forEach(function(alert) {
+      alert.remove();
+    });
+  }, 5000);
+</script>
+
+<div class="banner">
+  <div class="left-images">
+    <img src="/static/images/icecream1.png" alt="Left Image 1">
+    <img src="/static/images/icecream2.png" alt="Left Image 2">
+  </div>
+  <div>Contact Us! <br> How can we help you?</div>
+  <div class="right-images">
+    <img src="/static/images/icecream3.png" alt="Right Image 1">
+    <img src="/static/images/icecream4.png" alt="Right Image 2">
+  </div>
+</div>
+
+<div class="contact-container">
+  <div class="contact-form">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}" style="background-color: #7ACA79; border: 1px solid #000;">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="">
+      <div class="form-group">
+        {{ render_field(form.first_name, class="form-control") }}
+      </div>
+      <div class="form-group">
+        {{ render_field(form.last_name, class="form-control") }}
+      </div>
+      <div class="form-group">
+        {{ render_field(form.gender, class="form-control") }}
+      </div>
+      <div class="form-group">
+        {{ render_field(form.email_address, class="form-control") }}
+      </div>
+      <div class="form-group">
+        {{ render_field(form.feedback, class="form-control") }}
+      </div>
+      <input type="submit" value="Submit" class="btn btn-primary"/>
+    </form>
+  </div>
+
+  <div class="additional-info">
+    <p class="contact-details">Contact Details:</p>
+    <p>📞 Phone: +65 9898 9111</p>
+    <p>✉️ Email: <a href="contact@euphoricdelights.com">contact@euphoricdelights.com</a></p>
+    <p>📍 Location: Seng Kang Drive 201, #4-21, 534201 <br>    Ang Mo Kio Avenue 4, #2-89, 534930</p>
+  </div>
+</div>
+
+{% endblock %}

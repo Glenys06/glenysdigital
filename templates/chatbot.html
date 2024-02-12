@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <link rel="stylesheet" href="/static/css/chatbot.css">
+
+      <h1>Chatbot</h1>
+
+        <div id="chat-container">
+            <div id="chat-box">
+                <!-- Display the welcome message -->
+                <p class="chatbot-message">{{ welcome_message }}</p>
+            </div>
+            <div id="user-input">
+                <input type="text" id="user-message" placeholder="Type a message...">
+                <button onclick="sendMessage()" id="send-button">Send</button>
+            </div>
+        </div>
+
+        <script>
+        function sendMessage() {
+            var userMessage = document.getElementById('user-message').value.trim(); // Trim to remove leading and trailing spaces
+
+            if (userMessage === "") {
+                alert("Empty messages cannot be sent. Please enter a message.");
+                return; // Stop execution if the message is empty
+            }
+
+            document.getElementById('user-message').value = '';
+
+            var chatBox = document.getElementById('chat-box');
+            chatBox.innerHTML += '<p class="user-message">User: ' + userMessage + '</p>';
+
+            // Send user message to the server
+            fetch('/ask_chatbot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'user_message=' + encodeURIComponent(userMessage),
+            })
+            .then(response => response.json())
+            .then(data => {
+                var botResponse = data.bot_response;
+                chatBox.innerHTML += '<p class="chatbot-message">Bot: ' + botResponse + '</p>';
+            });
+        }
+
+        // Add event listener for 'Enter' key
+        document.getElementById('user-message').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent the default 'Enter' key behavior (new line)
+                sendMessage(); // Call the sendMessage function
+            }
+        });
+    </script>
+    {% endblock %}

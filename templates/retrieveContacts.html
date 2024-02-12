@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Library Loan System - Retrieve Contacts{% endblock %}
+
+{% block content %}
+<h1 class="display-4">Customer Contact Form Database</h1>
+<div>
+    {% if count == 0 %}
+        <p>There are no forms.</p>
+    {% elif count == 1 %}
+        <p>There is 1 form.</p>
+    {% else %}
+        <p>There are {{ count }} forms.</p>
+    {% endif %}
+</div>
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Contact ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Feedback</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for Contacts in contacts_list %}
+                <tr>
+                    <td>{{ Contacts.get_contact_id() }}</td>
+                    <td>{{ Contacts.get_first_name() }}</td>
+                    <td>{{ Contacts.get_last_name() }}</td>
+                    <td>{{ Contacts.get_gender() }}</td>
+                    <td>{{ Contacts.get_email_address() }}</td>
+                    <td>{{ Contacts.get_feedback() }}</td>
+                    <td><a href="/updateContact/{{Contacts.get_contact_id()}}" class="btn btn-warning">Update</a></td>
+                    <td>
+                        <form action="{{url_for('delete_contact', id=Contacts.get_contact_id())}}" method="POST">
+                            <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you
+want to delete {{Contacts.get_first_name()}} {{Contacts.get_last_name()}}?');">
+
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

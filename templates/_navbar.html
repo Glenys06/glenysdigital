@@ -1,6 +1,8 @@
+<div style="display: flex; justify-content: center;">
+  <a href="/"><img src="/static/images/logo.png" alt="Logo" style="width: 149px !important; height: 60px !important;" /></a>
+</div>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">LLS</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,21 +12,30 @@
           <a class="nav-link" href="/">Home</a>
         </li>
         <li class="nav-item dropdown">
-         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Manage Users</a>
+         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">About Us</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/createUser">Create User</a></li>
-            <li><a class="dropdown-item" href="/retrieveUsers">Retrieve User</a></li>
+            <li><a class="dropdown-item" href="#">History</a></li>
+            <li><a class="dropdown-item" href="/mission">Mission</a></li>
+            <li><a class="dropdown-item" href="#">Sustainability</a></li>
           </ul>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Manage
-          Customers</a>
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Products</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/createCustomer">Create Customer</a></li>
-            <li><a class="dropdown-item" href="/retrieveCustomers">Retrieve Customers</a></li>
+            <li><a class="dropdown-item" href="#">Custom Flavour Creator</a></li>
+            <li><a class="dropdown-item" href="/products">Products</a></li>
+            <li><a class="dropdown-item" href="/retrieveOrders">Your Orders</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Contact</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/contactUs">Contact Form</a></li>
+            <li><a class="dropdown-item" href="/chatbot">ChatBot</a></li>
+            <li><a class="dropdown-item" href="/retrieveContacts">Retreive Contact</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/contactUs">Contact Us</a>
+          <a href="/login"><img src="/static/images/DefaultAvatar.png" alt="Login Button" class="login" /></a>
         </li>
       </ul>
     </div>

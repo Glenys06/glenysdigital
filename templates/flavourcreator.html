@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Euphoric Delights - Flavour Creator{% endblock %}
+
+{% block content %}
+{% from "_formHelper.html" import render_field %}
+<style>
+    .image-options {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .image-options label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+    }
+    .image-options img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 5px;
+    }
+    .image-options input {
+        display: none;
+    }
+    .image-options input:checked + img {
+        border: 2px solid blue; /* Add a border or other styling for the selected image */
+    }
+</style>
+<h1 class="display-4">Create Flavour</h1>
+
+<form method="POST" action="">
+    <div class="form-group">
+        {{ render_field(form.first_name, class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.hidden_tag() }}
+        <div class="image-options">
+            {% for value, label in form.creationBase1.choices %}
+                <label>
+                    <input type="radio" name="{{ form.creationBase1.name }}" value="{{ value }}" {% if form.option.data == value %}checked{% endif %}>
+                    <img src="{{ url_for('static', filename='images/customFlavour/B' + value + '.png') }}" alt="{{ label }}">
+                </label>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form.hidden_tag() }}
+        <div class="image-options">
+            {% for value, label in form.creationMixIn1.choices %}
+                <label>
+                    <input type="radio" name="{{ form.creationMixIn1.name }}" value="{{ value }}" {% if form.option.data == value %}checked{% endif %}>
+                    <img src="{{ url_for('static', filename='images/customFlavour/M' + value + '.png') }}" alt="{{ label }}">
+                </label>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form.hidden_tag() }}
+        <div class="image-options">
+            {% for value, label in form.creationTopping1.choices %}
+                <label>
+                    <input type="radio" name="{{ form.creationTopping1.name }}" value="{{ value }}" {% if form.option.data == value %}checked{% endif %}>
+                    <img src="{{ url_for('static', filename='images/customFlavour/T' + value + '.png') }}" alt="{{ label }}">
+                </label>
+            {% endfor %}
+        </div>
+    </div>
+    <input type="submit" value="Submit" class="btn btn-primary"/>
+</form>
+{% endblock %}

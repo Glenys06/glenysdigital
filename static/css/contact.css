@@ -1,0 +1,82 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif; /* Change the font-family as needed */
+  background: #F2EEFC;
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #EAAEDB; /* Adjust the banner color as needed */
+  padding: 10px;
+  color: #2B0E5E;
+  font-size: 24px;
+}
+
+.banner img {
+  height: 80px; /* Adjust the image height as needed */
+  margin-right: 10px; /* Adjust the gap between images */
+}
+
+.left-images,
+.right-images {
+  display: flex;
+  align-items: center;
+}
+
+.contact-text {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.contact-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Align to the top */
+  margin-top: 20px; /* Adjust the margin between the banner and contact form */
+  margin-right: 50px; /* Adjust the margin between the contact details box and the contact form */
+  padding: 0 20px; /* Adjust the padding as needed */
+}
+
+
+.contact-form {
+  background: linear-gradient(to right, #87CEEB, #FFB6C1); /* Adjust the colors as needed */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 60%; /* Adjust the width as needed */
+}
+
+.additional-info {
+  background-color: #B5FCD2;
+  border: 1px solid #000;
+  padding: 10px;
+  border-radius: 5px;
+  width: 30%; /* Adjust the width as needed */
+  margin-left: 10px; /* Adjust the gap between the additional info box and the contact form */
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.btn-primary {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
