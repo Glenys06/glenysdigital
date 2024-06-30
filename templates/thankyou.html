@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Euphoric Delights - Submit a Review{% endblock %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="/static/css/reviews.css">
+{% endblock %}
+{% block content %}
+<h1 class="display-4">Thank you!</h1>
+<div>
+  Thank you for your review!
+  <script>
+      function redirect () {
+         setTimeout(myURL, 5000);
+         var result = document.getElementById("result");
+      }
+
+      function myURL() {
+         document.location.href = '../';
+      }
+   </script>
+</div>
+{% endblock %}

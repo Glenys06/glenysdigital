@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Euphoric Delights - Customer Reviews{% endblock %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="/static/css/reviews.css">
+{% endblock %}
+{% block content %}
+<h1 class="display-4">Reviews</h1>
+<div>
+  {% if count == 0 %}
+  <p>There are no reviews.</p>
+  {% elif count == 1 %}
+  <p>There is a review.</p>
+  {% else %}
+  <p>There are {{ count }} reviews.</p>
+  {% endif %}
+</div>
+{% for reviews in reviews_list %}
+<div class="reviewblurbs">
+  <div>
+    <p>{{ reviews.get_remarks() }}</p>
+    <p class="purchase_date">Purchased on: {{ reviews.get_date_of_review() }}</p>
+    <hr>
+    <p class="reviewer_name">Reviewed by: {{ reviews.get_first_name() }} {{ reviews.get_last_name() }}</p>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

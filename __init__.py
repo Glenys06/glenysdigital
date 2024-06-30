@@ -1,10 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify,session
-from Forms import CreateOrderForm, CreateContactForm#, CustomFlavourCreator
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session
+from Forms import CreateOrderForm, CreateContactForm, CreateReviewsForm#, CustomFlavourCreator
 from werkzeug.security import generate_password_hash, check_password_hash
-import shelve, Orders, Contact#, FlavourCreator
+import shelve, Reviews, Contact#, FlavourCreator
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'
+app.secret_key = 'ive_tried_so_hard_and_come_so_far_in_the_end_it_doesnt_even_matter'
 
 users = {
     'user1': {'password': generate_password_hash('password1'), 'email': 'user1@example.com'},
@@ -219,7 +219,7 @@ def delete_contact(id):
     db['Contacts'] = contacts_dict
     db.close()
 
-    return redirect(url_for('retrieveContacts'))
+    return redirect(url_for('retrieve_contacts'))
 @app.route('/mission')
 def mission():
     return render_template('mission.html')
@@ -495,6 +495,78 @@ def cart():
     print("session['cart']:", session.get('cart'))
     print("cart_items:", cart_items)
     return render_template('cart.html', cart_items=cart_items,total_price=total_price)
+
+@app.route('/createreviews', methods=['GET', 'POST'])
+def create_reviews():
+    create_reviews_form = CreateReviewsForm(request.form)
+    if request.method == 'POST' and create_reviews_form.validate():
+        reviews_dict = {}
+        db = shelve.open('static/database/reviews.db', 'c')
+        try:
+            reviews_dict = db['reviews']
+        except:
+            print("Error in retrieving reviews from database...")
+        reviews = Reviews.Review(create_reviews_form.first_name.data,
+                                    create_reviews_form.last_name.data,
+                                    create_reviews_form.remarks.data,
+                                    create_reviews_form.date_of_review.data)
+        reviews_dict[reviews.get_review_id()] = reviews
+        db['reviews'] = reviews_dict
+        db.close()
+        return redirect(url_for('submittedreview'))
+    return render_template('createreviews.html', form=create_reviews_form)
+@app.route('/retrievereviews')
+def retrieve_reviews():
+    reviews_dict = {}
+    db = shelve.open('static/database/reviews.db', 'r')
+    reviews_dict = db['reviews']
+    db.close()
+    reviews_list = []
+    for key in reviews_dict:
+        reviews = reviews_dict.get(key)
+        reviews_list.append(reviews)
+    return render_template('retrievereviews.html', count=len(reviews_list), reviews_list=reviews_list)
+@app.route('/updatereviews/<int:id>/', methods=['GET', 'POST'])
+def update_reviews(id):
+    update_reviews_form = CreateReviewsForm(request.form)
+    if request.method == 'POST' and update_reviews_form.validate():
+        reviews_dict = {}
+        db = shelve.open('static/database/reviews.db', 'w')
+        reviews_dict = db['reviews']
+        reviews = reviews_dict.get(id)
+        reviews.set_first_name(update_reviews_form.first_name.data)
+        reviews.set_last_name(update_reviews_form.last_name.data)
+        reviews.set_date_of_review(update_reviews_form.date_of_review.data)
+        reviews.set_remarks(update_reviews_form.remarks.data)
+        db['reviews'] = reviews_dict
+        db.close()
+        return redirect(url_for('retrieve_reviews'))
+    else:
+        db = shelve.open('static/database/reviews.db', 'r')
+        reviews_dict = db['reviews']
+        db.close()
+        reviews = reviews_dict.get(id)
+        update_reviews_form.first_name.data = reviews.get_first_name()
+        update_reviews_form.last_name.data = reviews.get_last_name()
+        update_reviews_form.date_of_review.data = reviews.get_date_of_review()
+        update_reviews_form.remarks.data = reviews.get_remarks()
+        return render_template('updatereviews.html', form=update_reviews_form)
+@app.route('/deletereviews/<int:id>', methods=['POST'])
+def delete_reviews(id):
+    reviews_dict = {}
+    db = shelve.open('static/database/reviews.db', 'w')
+    reviews_dict = db['reviews']
+    reviews_dict.pop(id)
+    db['reviews'] = reviews_dict
+    db.close()
+    return redirect(url_for('retrieve_reviews'))
+
+
+
+@app.route('/submittedreview')
+def submittedreview():
+    # You can handle payment processing logic here
+    return render_template('thankyou.html')
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0')

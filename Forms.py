@@ -45,3 +45,9 @@ class CreateContactForm(Form):
       'Email',
       [validators.Email(), validators.DataRequired()])
   feedback = TextAreaField('FeedbacK', [validators.Optional()])
+
+class CreateReviewsForm(Form):
+    first_name = StringField('First Name', [validators.Length(min=1, max=150), validators.DataRequired()])
+    last_name = StringField('Last Name', [validators.Length(min=1, max=150), validators.DataRequired()])
+    date_of_review = DateField('Date of Review', format='%Y-%m-%d')
+    remarks = TextAreaField('Review', [validators.Optional()])

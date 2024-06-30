@@ -213,6 +213,16 @@ files = [
 ]
 
 [[package]]
+name = "review"
+version = "1510"
+description = "upload script for Rietveld code review tool"
+optional = false
+python-versions = "*"
+files = [
+    {file = "review-1510.zip", hash = "sha256:0b49c9c80dfaf051b399d9147a76f0900edab95ee3816d2a4c1a3c3a6ad130f9"},
+]
+
+[[package]]
 name = "werkzeug"
 version = "3.0.1"
 description = "The comprehensive WSGI web application library."
@@ -249,4 +259,4 @@ email = ["email-validator"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10.0,<3.11"
-content-hash = "24b46e29826bf77473778240e113d7038172e5f994849f77c7afbf25538a40a6"
+content-hash = "5c62f11f2fd5bb337069b274c422ae49198a75721ce8d726b9a0eafa2c1ffc3a"

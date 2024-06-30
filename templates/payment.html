@@ -26,11 +26,6 @@
               return false;
           }
 
-          if (!/^\d+$/.test(expiryDate)) {
-              alert("Please enter numbers only for the expiration date.");
-              return false;
-          }
-
           if (!/^\d+$/.test(cvv)) {
               alert("Please enter numbers only for the CVV.");
               return false;
@@ -60,6 +55,7 @@
 
                 <input type="submit" value="Pay Now">
             </form>
+          <button onclick="window.location.href='/products'">Back to Products</button>
         </div> 
     </div> 
 </body>

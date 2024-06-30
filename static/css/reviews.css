@@ -1,0 +1,15 @@
+.reviewblurbs {
+  border-radius: 25px;
+  background: #89dde6;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.purchase_date {
+  text-align: right;
+  font-style: italics;
+}
+.reviewer_name {
+  text-align: right;
+  font-weight: 700;
+}

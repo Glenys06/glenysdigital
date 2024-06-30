@@ -2,9 +2,153 @@
 {% block title %}Euphoric Delights{% endblock %}
 
 {% block content %}
-<h1>Home</h1>
-<div class="content"> 
-<p>Welcome to Euphoric Delights, where we want to delight your taste buds and make sure we leave you feeling euphoric with every scoop.</p>
-<p>We offer many flavours and even a custom ice cream maker, so you can tweak the ice cream to your liking, making sure you get what you desire.</p>
-<p>With our rewards, you can always be sure that you get a little treat with each purchase.</p></div>
+<style>
+.image-container {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+  /* The Modal (background) */
+  .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  /* Modal Content/Box */
+  .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto; /* 15% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+  }
+
+  /* The Close Button */
+  .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+  }
+  /* Add styles for your footer */
+  .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color:#2A0A61; /* Light blue */
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+  }
+  /* Add bottom padding to the content */
+  .container {
+      padding-bottom: 100px; /* Adjust as needed */
+  }
+</style>
+
+<!-- Footer -->
+<div class="footer">
+    <p>&copy; 2024 Euphoric Delights. All rights reserved.</p>
+</div>
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Subscribe to Newsletter</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Subscribe to our newsletter to stay updated on our latest flavors and promotions!</p>
+    <form id="subscribeForm">
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email"><br>
+      <input type="submit" value="Subscribe">
+    </form>
+  </div>
+
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+// Get the form
+var form = document.getElementById("subscribeForm");
+
+// When the user submits the form, show a success message
+form.onsubmit = function(e) {
+  e.preventDefault();
+  alert("Subscription successful! Thank you for subscribing to our newsletter.");
+  modal.style.display = "none";
+}
+</script>
+
+<div class="container">
+    <h1>Welcome to Euphoric Delights</h1>
+    <div class="content"> 
+        <p>Indulge in the world of delightful ice creams at Euphoric Delights!</p>
+        <p>At Euphoric Delights, we are passionate about crafting the finest ice cream creations that will tantalize your taste buds and leave you craving for more.</p>
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Image of Ice Cream Flavors -->
+                <img class="image-container" src="https://png.pngtree.com/background/20230519/original/pngtree-six-ice-cream-cones-sitting-in-rows-with-different-colors-picture-image_2653130.jpg" alt="Ice Cream Flavors">
+            </div>
+            <div class="col-md-6">
+                <h2>Experience the Magic of Ice Cream</h2>
+                <p>Here's what you can expect from our enchanting ice cream wonderland:</p>
+                <ul>
+                    <li><strong>Exquisite Flavors:</strong> Explore our diverse range of flavors, from classic favorites like Vanilla and Chocolate to unique creations like Cotton Candy Carnival and Pomegranate Punch.</li>
+    
+                    <li><strong>Rewards Program:</strong> Join our rewards program and earn sweet treats with every purchase. The more you indulge, the more rewards you'll unlock!</li>
+                    <li><strong>Special Promotions:</strong> Stay tuned for our special promotions and seasonal offers. Follow us on social media to never miss out on exciting deals.</li>
+                </ul>
+                <p>Whether you're celebrating a special occasion, satisfying a sweet craving, or simply treating yourself, Euphoric Delights is your ultimate destination for delightful ice cream experiences.</p>
+                <p>Visit us today and embark on a scrumptious journey filled with joy, flavor, 
+and euphoria!</p>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
+
+
